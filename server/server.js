@@ -11,12 +11,28 @@ app.use(express.static('build'));
 /** ---------- ROUTES ---------- **/
 // Get movies from database.
 app.get('/movies', (req, res) => {
-    console.log('get request received');
+    // console.log('get request received');
     let queryString = `SELECT * FROM "movies";`;
     pool.query(queryString)
     .then(result => {
-        console.log('getting movies from database:', result.rows);
+        // console.log('getting movies from database:', result.rows);
         res.send(result.rows);
+    }).catch(error => {
+        console.log(error);
+        res.send(500);
+    });
+});
+
+app.get('/genres/:title', (req, res) => {
+    console.log('get request received', req.params.title);
+    let queryString = `SELECT "name" FROM "movies"
+    JOIN "movie_genre" ON "movies"."id" = "movie_genre"."movie_id"
+    JOIN "genres" ON "movie_genre"."genre_id" = "genres"."id"
+    WHERE "title" = '${req.params.title}';`;
+    pool.query(queryString)
+    .then(result => {
+        console.log('getting movies from database:', result.rows);
+        res.send(result.rows.name);
     }).catch(error => {
         console.log(error);
         res.send(500);
