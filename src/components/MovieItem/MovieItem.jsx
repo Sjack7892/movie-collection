@@ -8,7 +8,7 @@ class MovieItem extends Component {
         console.log('image clicked!', this.props.movieData.id);
         this.props.dispatch({
             type: 'SEND_DETAILS',
-            payload: this.props.movieData.description
+            payload: this.props.movieData
         })
         // Redirect to details page.
         // this.props.history.push("/details");

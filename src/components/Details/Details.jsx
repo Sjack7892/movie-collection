@@ -6,9 +6,10 @@ class Details extends Component {
     render() {
         return (
             <div>
-                <h1>Details</h1>
+                <h1>{this.props.title}</h1>
+                <p>{this.props.description}</p>
                 <Link to="/"><button>Back</button></Link>
-                <p>{this.props.details}</p>
+                <Link to="/edit"><button>Edit</button></Link>
             </div>
         )
     }
@@ -16,7 +17,8 @@ class Details extends Component {
 
 const putStateOnProps = (reduxState) => {
     return {
-        details: reduxState.details
+        title: reduxState.details.title,
+        description: reduxState.details.description
     }
 }
 
