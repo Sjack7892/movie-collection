@@ -16,7 +16,6 @@ class MovieItem extends Component {
             <div>
                 <h3>{this.props.movieData.title}</h3>
                 <Link to="/details"><img onClick={this.handleClick} src={this.props.movieData.poster} alt={this.props.movieData.title}/></Link>
-                <p>{this.props.movieData.description}</p>
             </div>
         )
     }

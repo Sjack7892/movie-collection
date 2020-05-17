@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Button} from '@material-ui/core';
+
 
 class Edit extends Component {
     render() {
@@ -13,8 +15,8 @@ class Edit extends Component {
                 <textarea value={this.props.description}></textarea>
                 <br/>
                 <br/>
-                <Link to="/details"><button>Cancel</button></Link>
-                <button>Save</button>
+                <Link to="/details"><Button variant="contained" color="primary">Cancel</Button></Link>
+                <Button variant="contained" color="primary">Save</Button>
             </div>
         )
     }
