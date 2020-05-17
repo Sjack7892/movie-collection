@@ -39,6 +39,22 @@ app.get('/genres/:title', (req, res) => {
     });
 });
 
+app.put('/movies', (req, res) => {
+    console.log('put received:', req.body);
+    let queryString = `
+    UPDATE "movies"
+    SET "title" = '${req.body.title}', description= '${req.body.description}'
+    WHERE "id" = '${req.body.id}';`;
+    pool.query(queryString)
+    .then(result => {
+        console.log('database updated!');
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+})
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);
