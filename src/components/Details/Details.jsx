@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Button} from '@material-ui/core';
 
 class Details extends Component {
+
     render() {
         return (
             <div>
@@ -30,7 +31,7 @@ const putStateOnProps = (reduxState) => {
         title: reduxState.details.title,
         description: reduxState.details.description,
         poster: reduxState.details.poster,
-        genres: reduxState.genres
+        genres: reduxState.genres,
     }
 }
 

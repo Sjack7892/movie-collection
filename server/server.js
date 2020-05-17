@@ -11,43 +11,43 @@ app.use(express.static('build'));
 /** ---------- ROUTES ---------- **/
 // Get movies from database.
 app.get('/movies', (req, res) => {
-    // console.log('get request received');
-    let queryString = `SELECT * FROM "movies";`;
+    let queryString = `
+    SELECT * FROM "movies" 
+    ORDER BY "id";`;
     pool.query(queryString)
     .then(result => {
-        // console.log('getting movies from database:', result.rows);
         res.send(result.rows);
     }).catch(error => {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     });
 });
 
-app.get('/genres/:title', (req, res) => {
-    console.log('get request received', req.params.title);
-    let queryString = `SELECT "name" FROM "movies"
+//Get genres from database.
+app.get('/genres/:id', (req, res) => {
+    let queryString = `
+    SELECT "name" FROM "movies"
     JOIN "movie_genre" ON "movies"."id" = "movie_genre"."movie_id"
     JOIN "genres" ON "movie_genre"."genre_id" = "genres"."id"
-    WHERE "title" = '${req.params.title}';`;
+    WHERE "movies"."id" = '${req.params.id}';`;
     pool.query(queryString)
     .then(result => {
-        console.log('getting movies from database:', result.rows);
         res.send(result.rows);
     }).catch(error => {
         console.log(error);
-        res.send(500);
+        res.sendStatus(500);
     });
 });
 
-app.put('/movies', (req, res) => {
-    console.log('put received:', req.body);
+
+// Update movie details.
+app.put('/movie', (req, res) => {
     let queryString = `
     UPDATE "movies"
-    SET "title" = '${req.body.title}', description= '${req.body.description}'
-    WHERE "id" = '${req.body.id}';`;
-    pool.query(queryString)
+    SET "title" = $1, description = $2
+    WHERE "id" = $3;`;
+    pool.query(queryString, [req.body.title, req.body.description, req.body.id])
     .then(result => {
-        console.log('database updated!');
         res.sendStatus(201);
     }).catch(error => {
         console.log(error);

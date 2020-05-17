@@ -1,0 +1,8 @@
+img {
+    box-shadow: 0 -6px 0 #fff, 0 10px 16px rgba(0, 0, 0, 0.789);
+    border: 5px solid rgb(255, 255, 255);
+}
+
+img:hover {
+    border: 5px solid rgb(240, 187, 13);
+}

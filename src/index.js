@@ -22,36 +22,32 @@ function* rootSaga() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Request movies from server.
 function* getMovies(action){
-    console.log('in getMovies');
     try {
         const response = yield axios.get('/movies')
-        console.log(response.data);
         yield put ({type: "SET_MOVIES", payload: response.data})
     } catch (error) {
         console.log(error);
     }
 };
 
+// Request genres from server.
 function* getGenres(action){
-    console.log('in getGenres:', action.payload);
-    let title = action.payload.title;
-    console.log(title);
+    console.log(action.payload);
+    let id = action.payload.id;
     try {
-        const response = yield axios.get(`/genres/${title}`)
-        console.log(response.data);
+        const response = yield axios.get(`/genres/${id}`)
         yield put ({type: "SET_GENRES", payload: response.data})
     } catch (error) {
         console.log(error);
     }
 };
 
+// Send updated details to server.
 function* putDetails(action){
-    console.log('in putDetails:', action.payload);
     try {
-        const response = yield axios.put('/movies', action.payload)
-        console.log(response.data);
-        // yield put ({type: "PUT_DETAILS", payload: response.data})
+        yield axios.put('/movie', action.payload)
     } catch (error) {
         console.log(error);
     }
@@ -59,7 +55,6 @@ function* putDetails(action){
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
-    console.log('in movies reducer', action.payload);
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
@@ -70,7 +65,6 @@ const movies = (state = [], action) => {
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
-    console.log('in genres:', action.payload);
     switch (action.type) {
         case 'SET_GENRES':
             return action.payload;
@@ -79,9 +73,12 @@ const genres = (state = [], action) => {
     }
 }
 
+// Used to store the movie details.
 const details = (state = [], action) => {
     switch (action.type) {
         case 'SEND_DETAILS':
+            return action.payload;
+        case 'EDIT_DETAILS':
             return action.payload;
         default:
             return state;
