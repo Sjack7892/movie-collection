@@ -32,7 +32,7 @@ app.get('/genres/:title', (req, res) => {
     pool.query(queryString)
     .then(result => {
         console.log('getting movies from database:', result.rows);
-        res.send(result.rows.name);
+        res.send(result.rows);
     }).catch(error => {
         console.log(error);
         res.send(500);
