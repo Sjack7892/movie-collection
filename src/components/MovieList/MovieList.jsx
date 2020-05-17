@@ -3,22 +3,7 @@ import MovieItem from '../MovieItem/MovieItem';
 import {connect} from 'react-redux';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { makeStyles } from '@material-ui/core/styles';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       display: 'flex',
-//       flexWrap: 'wrap',
-//       justifyContent: 'space-around',
-//       overflow: 'hidden',
-//       backgroundColor: theme.palette.background.paper,
-//     },
-//     gridList: {
-//       width: 500,
-//       height: 450,
-//     },
-//   }),
-// );
 
 class MovieList extends Component {
 
@@ -31,7 +16,6 @@ class MovieList extends Component {
     render() {
         return (
             <>
-                {/* <h1>Movies</h1> */}
                 <br/>
                 <GridList cellHeight={340} cols={5}>
                 {this.props.movies.map((movie, index) => {
