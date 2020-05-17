@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
-import {withRouter, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 class MovieItem extends Component {
     
     handleClick = () => {
-        console.log('image clicked!', this.props.movieData.id);
         this.props.dispatch({
             type: 'SEND_DETAILS',
             payload: this.props.movieData
         })
-        // Redirect to details page.
-        // this.props.history.push("/details");
     }
 
     render() {
@@ -25,4 +22,4 @@ class MovieItem extends Component {
     }
 }
 
-export default withRouter(connect()(MovieItem));
+export default connect()(MovieItem);
