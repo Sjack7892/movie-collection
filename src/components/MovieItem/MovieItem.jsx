@@ -16,7 +16,7 @@ class MovieItem extends Component {
     render() {
         return (
             <div>
-                <Link to="/details"><img onClick={this.handleClick} src={this.props.movieData.poster} alt={this.props.movieData.title}/></Link>
+                <Link to="/details"><img className="image" onClick={this.handleClick} src={this.props.movieData.poster} alt={this.props.movieData.title}/></Link>
             </div>
         )
     }
